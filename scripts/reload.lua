@@ -10,13 +10,13 @@ local h, err = ngx.req.get_headers()
 local passedSecret = h["X-Hub-Signature"][1]
 local secret = os.getenv("NGINX_GITHUB_SECRET")
 
-if nor passedSecret == secret then 
+if not passedSecret == secret then 
+    ngx.log(ngx.STDERR, "Invalid secret.")
     return
 else
-    ngx.log(ngx.STDERR, "Hash ok. Reloading.")
+    ngx.log(ngx.STDERR, "Secret valid. Reloading.")
 end
 
-
-    shell.run([[ "/etc/nginx/scripts/reload.sh" ]], stdin, timeout, max_size)
+shell.run([[ "/etc/nginx/scripts/reload.sh" ]], stdin, timeout, max_size)
 
 
