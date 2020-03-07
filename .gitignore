@@ -3,3 +3,4 @@ koehler/privkey.pem
 certs/fullchain.pem
 certs/privkey.pem
 *.log
+cloudflare.ini
