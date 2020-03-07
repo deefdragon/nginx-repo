@@ -3,17 +3,11 @@ local stdin = ""
 local timeout = 1000 -- ms
 local max_size = 4096 -- byte
 
-ngx.req.read_body()
 local h, err = ngx.req.get_headers()
 
-
-ngx.log(ngx.STDERR, "ERROR: ", err)
-
-for k, v in pairs(h) do
-    ngx.log(ngx.STDERR, "HEADER: ", k, " VALUE: ", v)    
+if h["X-Hub-Signature"] == nil then
+    ngx.log(ngx.STDERR, "No Secret!")    
 end
-
-
 
 local passedSecret = h["X-Hub-Signature"][1]
 local secret = os.getenv("NGINX_GITHUB_SECRET")
