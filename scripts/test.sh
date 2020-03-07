@@ -3,4 +3,4 @@
 
 
 
-echo webhook recieved on $(date) >> /etc/nginx/scripts/test.log
+echo webhook recieved via $(whoami) on $(date) >> /etc/nginx/scripts/test.log
